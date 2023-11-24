@@ -18,7 +18,7 @@ abstract class ImageExporter implements Exporter {
       directory_folder_render.createSync(recursive: true);
     }
 
-    return gifExporter(
+    return imageExporter(
       directory_folder_render: directory_folder_render,
     );
   }

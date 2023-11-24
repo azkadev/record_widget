@@ -15,7 +15,7 @@ import 'package:stream_channel/isolate_channel.dart';
 import "package:path/path.dart" as path;
 import 'package:universal_io/io.dart';
 
-ImageExporter gifExporter({
+ImageExporter imageExporter({
   required Directory directory_folder_render,
 }) {
   return IoImageExporter(directory_folder_render: directory_folder_render);
