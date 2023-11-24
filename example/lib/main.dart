@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 import 'dart:async';
 import 'dart:io';
 
@@ -29,15 +31,15 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
- State<MyHomePage>  createState() => _MyHomePageState();
+  State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   RecordWidgetController controller = RecordWidgetController(
-      pixelRatio: 1.0,
-      directory_folder_render: Directory(
-          "/home/galaxeus/Documents/galaxeus/app/record_widget/example/result"));
+    pixelRatio: 1.0,
+    directory_folder_render: Directory("/home/galaxeus/Documents/galaxeus/app/record_widget/example/result"),
+  );
 
   void _incrementCounter() {
     setState(() {
@@ -64,7 +66,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return RecordWidget(
-      
       controller: controller,
       child: Scaffold(
         appBar: AppBar(
@@ -79,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               Center(
                 child: Text(
-                  '$_counter',
+                  '${_counter}',
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
@@ -96,10 +97,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Text('Stop'),
               ),
               ElevatedButton(
-                onPressed: () async {
-                  
-                  
-                },
+                onPressed: () async {},
                 child: const Text('show recoded video'),
               ),
             ],

@@ -6,10 +6,10 @@ import 'package:record_widget/record_widget.dart';
 
 import 'io_image_exporter.dart';
 
-abstract class GifExporter implements Exporter {
-  factory GifExporter({
+abstract class ImageExporter implements Exporter {
+  factory ImageExporter({
     required Directory directory_folder_render,
-  }) { 
+  }) {
     if (directory_folder_render.existsSync()) {
       directory_folder_render.deleteSync(
         recursive: true,

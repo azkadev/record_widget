@@ -46,8 +46,7 @@ class RecordWidgetController {
     SchedulerBinding? binding,
   })  : _containerKey = GlobalKey(),
         _binding = binding ?? SchedulerBinding.instance,
-        exporter = exporter ?? GifExporter(directory_folder_render: directory_folder_render);
-
+        exporter = exporter ?? ImageExporter(directory_folder_render: directory_folder_render);
 
   void start() {
     // only start a video, if no recording is in progress

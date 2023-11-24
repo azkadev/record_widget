@@ -14,13 +14,13 @@ import 'package:record_widget/src/image/image_exporter.dart';
 import 'package:stream_channel/isolate_channel.dart';
 import "package:path/path.dart" as path;
 
-GifExporter gifExporter({
+ImageExporter gifExporter({
   required Directory directory_folder_render,
 }) {
-  return IoGifExporter(directory_folder_render: directory_folder_render);
+  return IoImageExporter(directory_folder_render: directory_folder_render);
 }
 
-class IoGifExporter implements GifExporter {
+class IoImageExporter implements ImageExporter {
   @override
   Directory directory_folder_render;
 
@@ -33,7 +33,7 @@ class IoGifExporter implements GifExporter {
   Isolate? _isolate;
 
   int frame_index = 0;
-  IoGifExporter({required this.directory_folder_render}) {
+  IoImageExporter({required this.directory_folder_render}) {
     _controller.stream.listen((event) async {
       if (event is _InitIsolateMessage) {
         await _initIsolate();
@@ -72,7 +72,7 @@ class IoGifExporter implements GifExporter {
     _isolate = await Isolate.spawn<SendPort>(
       _isolateEntryPoint,
       receivePort.sendPort,
-      debugName: 'GifExporterIsolate',
+      debugName: 'ImageExporterIsolate',
     );
   }
 
@@ -129,7 +129,7 @@ class _InternalExporter {
   }
 
   List<int>? export() {
-    // image.encodeGifAnimation(animation);
+    // image.encodeImageAnimation(animation);
     return null;
   }
 }
