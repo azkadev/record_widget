@@ -100,23 +100,11 @@ class _MyHomePageState extends State<MyHomePage> {
               ElevatedButton(
                 onPressed: () async {
                   controller.stop();
+
                   Future(() async {
-                    var shell = await Process.start(
-                      "ffmpeg",
-                      [
-                        "-y",
-                        "-f",
-                        "image2",
-                        "-i",
-                        Directory(path.join(controller.directory_folder_render.path, "%01d.png")).path,
-                        Directory(path.join(controller.directory_folder_render.path, "output.mp4")).path,
-                      ],
-                      workingDirectory: controller.directory_folder_render.path,
-                    );
-                    shell.stderr.listen(stderr.add);
-                    shell.stdout.listen(stdout.add);
-                    int exitCode = await shell.exitCode;
-                    print(exitCode);
+                    bool is_saved = await controller.renderToVideoMp4(outputFile: File(path.join(controller.directory_folder_render.path, "output.mp4")));
+
+                    print(is_saved);
                   });
                 },
                 child: const Text('Render To Video'),

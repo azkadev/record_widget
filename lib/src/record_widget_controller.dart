@@ -11,6 +11,7 @@ import 'dart:ui' as ui show Image;
 import 'package:record_widget/src/exporter.dart';
 import 'package:record_widget/src/frame.dart';
 import 'package:record_widget/src/image/image_exporter.dart';
+import "package:path/path.dart" as path;
 
 class RecordWidgetController {
   final Directory directory_folder_render;
@@ -48,8 +49,7 @@ class RecordWidgetController {
     if (imageExporter != null) {
       exporter = imageExporter;
     } else {
-      exporter =
-          ImageExporter(directory_folder_render: directory_folder_render);
+      exporter = ImageExporter(directory_folder_render: directory_folder_render);
     }
   }
   void start() {
@@ -100,12 +100,30 @@ class RecordWidgetController {
   }
 
   ui.Image? capture() {
-    final renderObject = containerKey.currentContext!.findRenderObject()
-        as RenderRepaintBoundary;
+    final renderObject = containerKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
 
     return renderObject.toImageSync(pixelRatio: pixelRatio);
   }
 
   Future<List<int>?> export() => exporter.export();
+
+  Future<bool> renderToVideoMp4({
+    required File outputFile,
+  }) async {
+    var shell = await Process.start(
+      "ffmpeg",
+      [
+        "-y",
+        "-f",
+        "image2",
+        "-i",
+        Directory(path.join(directory_folder_render.path, "%01d.png")).path,
+        outputFile.path,
+      ],
+    );
+    shell.stderr.listen(stderr.add);
+    shell.stdout.listen(stdout.add);
+    int exitCode = await shell.exitCode;
+    return (exitCode == 0);
+  }
 }
- 
