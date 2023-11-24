@@ -10,7 +10,7 @@ import 'dart:ui' as ui show Image;
 
 import 'package:record_widget/src/exporter.dart';
 import 'package:record_widget/src/frame.dart';
-import 'package:record_widget/src/gif/gif_exporter.dart';
+import 'package:record_widget/src/image/image_exporter.dart';
 
 class ScreenRecorderController {
   final Directory directory_folder_render;
@@ -37,7 +37,7 @@ class ScreenRecorderController {
   int skipped = 0;
 
   bool _record = false;
-  
+
   ScreenRecorderController({
     required this.directory_folder_render,
     Exporter? exporter,

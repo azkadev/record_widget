@@ -1,4 +1,4 @@
-// ignore_for_file: unused_field, unused_local_variable, unused_import, non_constant_identifier_names
+// ignore_for_file: unused_field, unused_local_variable, unused_import, non_constant_identifier_names, unnecessary_brace_in_string_interps
 
 import 'dart:async';
 import 'dart:io';
@@ -10,7 +10,7 @@ import 'package:image/image.dart' as image;
 import 'dart:ui' as ui show ImageByteFormat;
 import 'package:flutter/foundation.dart';
 import 'package:record_widget/src/frame.dart';
-import 'package:record_widget/src/gif/gif_exporter.dart';
+import 'package:record_widget/src/image/image_exporter.dart';
 import 'package:stream_channel/isolate_channel.dart';
 import "package:path/path.dart" as path;
 
@@ -23,7 +23,6 @@ GifExporter gifExporter({
 class IoGifExporter implements GifExporter {
   @override
   Directory directory_folder_render;
-
 
   final StreamController _controller = StreamController();
 
@@ -45,15 +44,12 @@ class IoGifExporter implements GifExporter {
           frame_index++;
           Future(() async {
             if (kDebugMode) {
-              print("new frame: $frame_index");
+              print("new frame: ${frame_index}");
             }
             var res = i.buffer.asUint8List();
-
-            var bytes = res.buffer.asUint8List();
-
-            final decodedImage = image.decodePng(bytes);
-            File file = File(path.join(directory_folder_render.path,"$frame_index.png"));
-            await file.writeAsBytes(bytes);
+            final decodedImage = image.decodePng(res);
+            File file = File(path.join(directory_folder_render.path, "${frame_index}.png"));
+            await file.writeAsBytes(res);
           });
           channel!.sink.add(RawFrame(16, i));
         } else {
@@ -68,6 +64,9 @@ class IoGifExporter implements GifExporter {
   }
 
   Future<void> _initIsolate() async {
+    if (kDebugMode) {
+      print("init isolate");
+    }
     channel = IsolateChannel.connectReceive(receivePort);
 
     _isolate = await Isolate.spawn<SendPort>(
@@ -90,11 +89,9 @@ class IoGifExporter implements GifExporter {
 }
 
 class RawFrame {
-
   final int durationInMillis;
   final ByteData image;
   RawFrame(this.durationInMillis, this.image);
-
 }
 
 void _isolateEntryPoint(SendPort sendPort) {
