@@ -120,9 +120,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
                     print(is_saved);
 
-                  setState(() {
-                    is_stop = false;
-                  });
+                    setState(() {
+                      is_stop = false;
+                    });
                   });
                 },
                 child: const Text('Render To Video'),
@@ -131,9 +131,16 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: _incrementCounter,
-          tooltip: 'Increment',
-          child: const Icon(Icons.add),
+          onPressed: () async {
+            controller.stop();
+            Future(() async {
+              bool is_save = await controller.renderToVideoMp4(outputFile: File("./output.mp4"));
+
+              print(is_save ? "Succes" : "Gagal");
+            });
+          },
+          tooltip: 'Stop',
+          child: const Icon(Icons.stop),
         ),
       ),
     );

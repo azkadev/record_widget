@@ -31,15 +31,31 @@ class _MyHomePageState extends State<MyHomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      // auto start record on first display widget
       controller.start();
     });
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
     return RecordWidget(
       controller: controller,
-      child: // code any widget
+      child: Scaffold( 
+        body: // code any widget,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            controller.stop();
+            Future(() async {
+              bool is_save = await controller.renderToVideoMp4(outputFile: File("./output.mp4"));
+              print(is_save ? "Succes" : "Gagal");
+            });
+          },
+          tooltip: 'Stop',
+          child: const Icon(Icons.stop),
+        ),
+      ),
     );
   }
   /// any code
@@ -47,6 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
 ```
 
 
-Render
-
+## Render
+```bash
 ffmpeg -f image2 -i %01d.png output.mp4
+```
