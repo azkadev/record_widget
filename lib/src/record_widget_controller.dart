@@ -49,7 +49,8 @@ class RecordWidgetController {
     if (imageExporter != null) {
       exporter = imageExporter;
     } else {
-      exporter = ImageExporter(directory_folder_render: directory_folder_render);
+      exporter =
+          ImageExporter(directory_folder_render: directory_folder_render);
     }
   }
   void start() {
@@ -100,12 +101,20 @@ class RecordWidgetController {
   }
 
   ui.Image? capture() {
-    final renderObject = containerKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+    final renderObject = containerKey.currentContext!.findRenderObject()
+        as RenderRepaintBoundary;
 
     return renderObject.toImageSync(pixelRatio: pixelRatio);
   }
 
   Future<List<int>?> export() => exporter.export();
+
+  Future<bool> stopAndRenderToVideoMp4({
+    required File outputFile,
+  }) async {
+    stop();
+    return await renderToVideoMp4(outputFile: outputFile);
+  }
 
   Future<bool> renderToVideoMp4({
     required File outputFile,
