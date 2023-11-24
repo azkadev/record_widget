@@ -45,3 +45,4 @@ app.*.map.json
 
 *.png
 *.mp4
+!.github/demo.mp4
