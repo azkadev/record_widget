@@ -1,7 +1,11 @@
 # Record Widget
 
+Record widget sebuah library untuk merekam widget rendering / apapun yang ada perubahan secara realtime dengan menyimpan ke gambar (png) dahulu karena jika langsung ke video saat ini belum bisa, dan untuk melakukan convert ke video kamu perlu menginstall FFMPEG untuk menconvert banyak gambar ke video
 
-flutter pub add record_widget
+## Demo
+
+
+---
 
 ## Quickstart
 
@@ -12,10 +16,10 @@ flutter pub add record_widget
 ```
 
 ### Import Library
+
 ```dart
 import 'package:record_widget/record_widget.dart';
 ```
-
 
 ### Example Code
 
