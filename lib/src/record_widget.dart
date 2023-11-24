@@ -12,7 +12,7 @@ import 'package:record_widget/src/exporter.dart';
 import 'package:record_widget/src/frame.dart';
 import 'package:record_widget/src/image/image_exporter.dart';
 
-class ScreenRecorderController {
+class RecordWidgetController {
   final Directory directory_folder_render;
 
   final GlobalKey _containerKey;
@@ -38,7 +38,7 @@ class ScreenRecorderController {
 
   bool _record = false;
 
-  ScreenRecorderController({
+  RecordWidgetController({
     required this.directory_folder_render,
     Exporter? exporter,
     this.pixelRatio = 1.0,
@@ -105,14 +105,14 @@ class ScreenRecorderController {
   Future<List<int>?> export() => exporter.export();
 }
 
-class ScreenRecorder extends StatelessWidget {
+class RecordWidget extends StatelessWidget {
   /// The child which should be recorded.
   final Widget child;
 
   /// This controller starts and stops the recording.
-  final ScreenRecorderController controller;
+  final RecordWidgetController controller;
 
-  const ScreenRecorder({
+  const RecordWidget({
     super.key,
     required this.child,
     required this.controller,

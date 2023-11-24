@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:record_widget/record_widget.dart';
@@ -35,7 +34,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  ScreenRecorderController controller = ScreenRecorderController(
+  RecordWidgetController controller = RecordWidgetController(
       pixelRatio: 1.0,
       directory_folder_render: Directory(
           "/home/galaxeus/Documents/galaxeus/app/record_widget/example/result"));
@@ -64,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenRecorder(
+    return RecordWidget(
       
       controller: controller,
       child: Scaffold(
@@ -98,15 +97,8 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  var gif = await controller.export();
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        content: Image.memory(Uint8List.fromList(gif!)),
-                      );
-                    },
-                  );
+                  
+                  
                 },
                 child: const Text('show recoded video'),
               ),
