@@ -1,4 +1,4 @@
-// ignore_for_file: unused_field, unused_local_variable, unused_import
+// ignore_for_file: unused_field, unused_local_variable, unused_import, non_constant_identifier_names
 
 import 'dart:async';
 import 'dart:io';
@@ -13,11 +13,17 @@ import 'package:record_widget/src/frame.dart';
 import 'package:record_widget/src/gif/gif_exporter.dart';
 import 'package:stream_channel/isolate_channel.dart';
 
-GifExporter gifExporter() => IoGifExporter();
+GifExporter gifExporter({
+  required Directory directory_folder_render,
+}) {
+ return IoGifExporter(directory_folder_render: directory_folder_render);
+}
 
 class IoGifExporter implements GifExporter {
+  @override
+  Directory directory_folder_render;
   int frame_index = 0;
-  IoGifExporter() {
+  IoGifExporter({required this.directory_folder_render}) {
     _controller.stream.listen((event) async {
       if (event is _InitIsolateMessage) {
         await _initIsolate();

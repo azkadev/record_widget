@@ -6,15 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:record_widget/record_widget.dart';
 
 void main() {
-  Directory directory = Directory("/home/galaxeus/Documents/galaxeus/app/record_widget/example/test");
-  if (directory.existsSync()) {
-    directory.deleteSync(
-      recursive: true,
-    );
-    directory.createSync(recursive: true);
-  } else {
-    directory.createSync(recursive: true);
-  }
   runApp(const MyApp());
 }
 
@@ -44,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  ScreenRecorderController controller = ScreenRecorderController(pixelRatio: 1.0);
+  ScreenRecorderController controller = ScreenRecorderController(pixelRatio: 1.0, directory_folder_render: Directory("/home/galaxeus/Documents/galaxeus/app/record_widget/example/test"));
 
   void _incrementCounter() {
     setState(() {

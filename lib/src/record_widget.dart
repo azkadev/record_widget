@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
@@ -8,14 +10,16 @@ import 'package:record_widget/src/frame.dart';
 import 'package:record_widget/src/gif/gif_exporter.dart';
 
 class ScreenRecorderController {
+  final Directory directory_folder_render;
   ScreenRecorderController({
+    required this.directory_folder_render,
     Exporter? exporter,
     this.pixelRatio = 1.0,
     this.skipFramesBetweenCaptures = 2,
     SchedulerBinding? binding,
   })  : _containerKey = GlobalKey(),
         _binding = binding ?? SchedulerBinding.instance,
-        exporter = exporter ?? GifExporter();
+        exporter = exporter ?? GifExporter(directory_folder_render: directory_folder_render);
 
   final GlobalKey _containerKey;
   final SchedulerBinding _binding;
