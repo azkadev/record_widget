@@ -65,7 +65,6 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 ```
 
-
 ## Render
 ```bash
 ffmpeg -f image2 -i %01d.png output.mp4
