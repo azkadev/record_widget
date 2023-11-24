@@ -1,10 +1,20 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:record_widget/record_widget.dart';
 
 void main() {
+  Directory directory = Directory("/home/galaxeus/Documents/galaxeus/app/record_widget/example/test");
+  if (directory.existsSync()) {
+    directory.deleteSync(
+      recursive: true,
+    );
+    directory.createSync(recursive: true);
+  } else {
+    directory.createSync(recursive: true);
+  }
   runApp(const MyApp());
 }
 
