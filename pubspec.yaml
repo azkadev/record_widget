@@ -1,6 +1,6 @@
 name: record_widget
 description: Library for record widget to image realtime fast and can render to video
-version: 0.0.6
+version: 0.0.7
 homepage: https://github.com/azkadev/record_widget.git
 repository: https://github.com/azkadev/record_widget.git
 issue_tracker: https://github.com/azkadev/record_widget.git

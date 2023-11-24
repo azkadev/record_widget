@@ -8,6 +8,7 @@ import 'package:record_widget/record_widget.dart';
 import "package:path/path.dart" as path;
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -17,11 +18,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Record Widget',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Record Widget'),
     );
   }
 }
@@ -62,9 +64,6 @@ class _MyHomePageState extends State<MyHomePage> {
     if (is_stop) {
       return;
     }
-    // await Future.delayed(Duration(milliseconds: 500));
-    // print("object");
-
     _incrementCounter();
   }
 
@@ -79,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
+            children: [
               const Text(
                 'You have pushed the button this many times:',
               ),
@@ -89,58 +88,55 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  controller.start();
-                },
-                child: const Text('Start'),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: ElevatedButton(
+                  onPressed: () {
+                    controller.start();
+                  },
+                  child: const Text('Start'),
+                ),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  controller.stop();
-                },
-                child: const Text('Stop'),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: ElevatedButton(
+                  onPressed: () {
+                    controller.stop();
+                  },
+                  child: const Text('Stop'),
+                ),
               ),
-              ElevatedButton(
-                onPressed: () async {
-                  controller.stop();
-                  setState(() {
-                    is_stop = true;
-                  });
-
-                  Future(() async {
-                    bool is_saved = await controller.renderToVideoMp4(
-                      outputFile: File(
-                        path.join(
-                          controller.directory_folder_render.path,
-                          "output.mp4",
-                        ),
-                      ),
-                    );
-
-                    print(is_saved);
-
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    controller.stop();
                     setState(() {
-                      is_stop = false;
+                      is_stop = true;
                     });
-                  });
-                },
-                child: const Text('Render To Video'),
+
+                    Future(() async {
+                      bool is_saved = await controller.renderToVideoMp4(
+                        outputFile: File(
+                          path.join(
+                            controller.directory_folder_render.path,
+                            "output.mp4",
+                          ),
+                        ),
+                      );
+
+                      print(is_saved);
+
+                      setState(() {
+                        is_stop = false;
+                      });
+                    });
+                  },
+                  child: const Text('Render To Video'),
+                ),
               ),
             ],
           ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            controller.stop();
-            Future(() async {
-              bool is_save = await controller.renderToVideoMp4(outputFile: File("./output.mp4"));
-
-              print(is_save ? "Succes" : "Gagal");
-            });
-          },
-          tooltip: 'Stop',
-          child: const Icon(Icons.stop),
         ),
       ),
     );
