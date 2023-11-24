@@ -9,6 +9,5 @@ abstract class Exporter {
     required this.directory_folder_render,
   });
   void onNewFrame(Frame frame);
-
-  // Future<List<int>?> export();
+ 
 }

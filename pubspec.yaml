@@ -8,7 +8,6 @@ issue_tracker: https://github.com/azkadev/record_widget.git
 environment:
   sdk: '>=3.2.0 <4.0.0'
 
-
 dependencies:
   flutter:
     sdk: flutter
