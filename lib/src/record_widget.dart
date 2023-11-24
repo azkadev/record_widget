@@ -1,5 +1,8 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
@@ -11,15 +14,6 @@ import 'package:record_widget/src/gif/gif_exporter.dart';
 
 class ScreenRecorderController {
   final Directory directory_folder_render;
-  ScreenRecorderController({
-    required this.directory_folder_render,
-    Exporter? exporter,
-    this.pixelRatio = 1.0,
-    this.skipFramesBetweenCaptures = 2,
-    SchedulerBinding? binding,
-  })  : _containerKey = GlobalKey(),
-        _binding = binding ?? SchedulerBinding.instance,
-        exporter = exporter ?? GifExporter(directory_folder_render: directory_folder_render);
 
   final GlobalKey _containerKey;
   final SchedulerBinding _binding;
@@ -43,6 +37,17 @@ class ScreenRecorderController {
   int skipped = 0;
 
   bool _record = false;
+  
+  ScreenRecorderController({
+    required this.directory_folder_render,
+    Exporter? exporter,
+    this.pixelRatio = 1.0,
+    this.skipFramesBetweenCaptures = 2,
+    SchedulerBinding? binding,
+  })  : _containerKey = GlobalKey(),
+        _binding = binding ?? SchedulerBinding.instance,
+        exporter = exporter ?? GifExporter(directory_folder_render: directory_folder_render);
+
 
   void start() {
     // only start a video, if no recording is in progress
@@ -77,12 +82,16 @@ class ScreenRecorderController {
     try {
       final image = capture();
       if (image == null) {
-        print('capture returned null');
+        if (kDebugMode) {
+          print('capture returned null');
+        }
         return;
       }
       exporter.onNewFrame(Frame(timestamp, image));
     } catch (e) {
-      print(e.toString());
+      if (kDebugMode) {
+        print(e.toString());
+      }
     }
     _binding.addPostFrameCallback(postFrameCallback);
   }
@@ -97,46 +106,23 @@ class ScreenRecorderController {
 }
 
 class ScreenRecorder extends StatelessWidget {
-  ScreenRecorder({
-    Key? key,
-    required this.child,
-    required this.controller,
-    required this.width,
-    required this.height,
-    this.background = Colors.white,
-  })  : assert(background.alpha == 255, 'background color is not allowed to be transparent'),
-        super(key: key);
-
   /// The child which should be recorded.
   final Widget child;
 
   /// This controller starts and stops the recording.
   final ScreenRecorderController controller;
 
-  /// Width of the recording.
-  /// This should not change during recording as it could lead to
-  /// undefined behavior.
-  final double width;
-
-  /// Height of the recording
-  /// This should not change during recording as it could lead to
-  /// undefined behavior.
-  final double height;
-
-  /// The background color of the recording.
-  /// Transparency is currently not supported.
-  final Color background;
+  const ScreenRecorder({
+    super.key,
+    required this.child,
+    required this.controller,
+  });
 
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
       key: controller._containerKey,
-      child: Container(
-        width: width,
-        height: height,
-        color: background,
-        child: child,
-      ),
+      child: child,
     );
   }
 }

@@ -30,12 +30,15 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+ State<MyHomePage>  createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
-  ScreenRecorderController controller = ScreenRecorderController(pixelRatio: 1.0, directory_folder_render: Directory("/home/galaxeus/Documents/galaxeus/app/record_widget/example/test"));
+  ScreenRecorderController controller = ScreenRecorderController(
+      pixelRatio: 1.0,
+      directory_folder_render: Directory(
+          "/home/galaxeus/Documents/galaxeus/app/record_widget/example/result"));
 
   void _incrementCounter() {
     setState(() {
@@ -62,8 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return ScreenRecorder(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
+      
       controller: controller,
       child: Scaffold(
         appBar: AppBar(

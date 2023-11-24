@@ -12,16 +12,27 @@ import 'package:flutter/foundation.dart';
 import 'package:record_widget/src/frame.dart';
 import 'package:record_widget/src/gif/gif_exporter.dart';
 import 'package:stream_channel/isolate_channel.dart';
+import "package:path/path.dart" as path;
 
 GifExporter gifExporter({
   required Directory directory_folder_render,
 }) {
- return IoGifExporter(directory_folder_render: directory_folder_render);
+  return IoGifExporter(directory_folder_render: directory_folder_render);
 }
 
 class IoGifExporter implements GifExporter {
   @override
   Directory directory_folder_render;
+
+
+  final StreamController _controller = StreamController();
+
+  ReceivePort receivePort = ReceivePort();
+
+  IsolateChannel? channel;
+
+  Isolate? _isolate;
+
   int frame_index = 0;
   IoGifExporter({required this.directory_folder_render}) {
     _controller.stream.listen((event) async {
@@ -33,32 +44,28 @@ class IoGifExporter implements GifExporter {
         if (i != null) {
           frame_index++;
           Future(() async {
-            print("new frame: $frame_index");
+            if (kDebugMode) {
+              print("new frame: $frame_index");
+            }
             var res = i.buffer.asUint8List();
 
             var bytes = res.buffer.asUint8List();
 
             final decodedImage = image.decodePng(bytes);
-            File file = File("/home/galaxeus/Documents/galaxeus/app/record_widget/example/test/$frame_index.png");
+            File file = File(path.join(directory_folder_render.path,"$frame_index.png"));
             await file.writeAsBytes(bytes);
           });
           channel!.sink.add(RawFrame(16, i));
         } else {
-          print('Skipped frame while enconding');
+          if (kDebugMode) {
+            print('Skipped frame while enconding');
+          }
         }
       }
     });
 
     _controller.add(_InitIsolateMessage());
   }
-
-  final StreamController _controller = StreamController();
-
-  ReceivePort receivePort = ReceivePort();
-
-  IsolateChannel? channel;
-
-  Isolate? _isolate;
 
   Future<void> _initIsolate() async {
     channel = IsolateChannel.connectReceive(receivePort);
@@ -83,10 +90,11 @@ class IoGifExporter implements GifExporter {
 }
 
 class RawFrame {
-  RawFrame(this.durationInMillis, this.image);
 
   final int durationInMillis;
   final ByteData image;
+  RawFrame(this.durationInMillis, this.image);
+
 }
 
 void _isolateEntryPoint(SendPort sendPort) {
