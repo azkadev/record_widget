@@ -4,7 +4,7 @@ Record widget sebuah library untuk merekam widget rendering / apapun yang ada pe
 
 ## Demo
 
-[![](https://raw.githubusercontent.com/azkadev/record_widget/main/.github/demo.gif)](https://raw.githubusercontent.com/azkadev/record_widget/main/.github/demo.mp4)
+[![](https://raw.githubusercontent.com/azkadev/record_widget/main/.github/demo.gif)](https://github.com/azkadev/record_widget/assets/82513502/71f23049-6c58-41c9-b95f-e4380a0da899)
 
 ---
 
