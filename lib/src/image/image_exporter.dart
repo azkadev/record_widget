@@ -1,8 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'dart:io';
-
 import 'package:record_widget/record_widget.dart';
+import 'package:universal_io/io.dart';
 
 import 'io_image_exporter.dart';
 

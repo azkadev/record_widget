@@ -1,6 +1,6 @@
 name: record_widget
 description: Library for record widget to image realtime fast and can render to video
-version: 0.0.4
+version: 0.0.5
 
 environment:
   sdk: '>=3.2.0 <4.0.0'
@@ -17,6 +17,7 @@ dependencies:
   image: ^4.1.3
   stream_channel: ^2.1.2
   path: ^1.8.3
+  universal_io: ^2.2.2
 
 dev_dependencies:
   flutter_test:

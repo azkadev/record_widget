@@ -1,7 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -12,6 +10,7 @@ import 'package:record_widget/src/exporter.dart';
 import 'package:record_widget/src/frame.dart';
 import 'package:record_widget/src/image/image_exporter.dart';
 import "package:path/path.dart" as path;
+import 'package:universal_io/io.dart';
 
 class RecordWidgetController {
   final Directory directory_folder_render;
@@ -106,8 +105,6 @@ class RecordWidgetController {
 
     return renderObject.toImageSync(pixelRatio: pixelRatio);
   }
-
-  Future<List<int>?> export() => exporter.export();
 
   Future<bool> stopAndRenderToVideoMp4({
     required File outputFile,
