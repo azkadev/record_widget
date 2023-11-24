@@ -46,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
         body: // code any widget,
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
+            // stop and render to file ./output.mp4
             controller.stop();
             Future(() async {
               bool is_save = await controller.renderToVideoMp4(outputFile: File("./output.mp4"));
