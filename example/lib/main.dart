@@ -41,7 +41,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   RecordWidgetController controller = RecordWidgetController(
     pixelRatio: 1.0,
-    directory_folder_render: Directory(path.join(Directory.current.path, "result")),
+    directory_folder_render:
+        Directory(path.join(Directory.current.path, "result")),
   );
 
   bool is_stop = false;
