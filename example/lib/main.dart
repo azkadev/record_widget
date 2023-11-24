@@ -1,10 +1,11 @@
-// ignore_for_file: unnecessary_brace_in_string_interps
+// ignore_for_file: unnecessary_brace_in_string_interps, avoid_print
 
 import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:record_widget/record_widget.dart';
+import "package:path/path.dart" as path;
 
 void main() {
   runApp(const MyApp());
@@ -38,8 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   RecordWidgetController controller = RecordWidgetController(
     pixelRatio: 1.0,
-    directory_folder_render: Directory(
-        "/home/galaxeus/Documents/galaxeus/app/record_widget/example/result"),
+    directory_folder_render: Directory("/home/galaxeus/Documents/galaxeus/app/record_widget/example/result"),
   );
 
   void _incrementCounter() {
@@ -98,8 +98,28 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Text('Stop'),
               ),
               ElevatedButton(
-                onPressed: () async {},
-                child: const Text('show recoded video'),
+                onPressed: () async {
+                  controller.stop();
+                  Future(() async {
+                    var shell = await Process.start(
+                      "ffmpeg",
+                      [
+                        "-y",
+                        "-f",
+                        "image2",
+                        "-i",
+                        Directory(path.join(controller.directory_folder_render.path, "%01d.png")).path,
+                        Directory(path.join(controller.directory_folder_render.path, "output.mp4")).path,
+                      ],
+                      workingDirectory: controller.directory_folder_render.path,
+                    );
+                    shell.stderr.listen(stderr.add);
+                    shell.stdout.listen(stdout.add);
+                    int exitCode = await shell.exitCode;
+                    print(exitCode);
+                  });
+                },
+                child: const Text('Render To Video'),
               ),
             ],
           ),
