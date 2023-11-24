@@ -1,4 +1,4 @@
-// ignore_for_file: unnecessary_brace_in_string_interps, avoid_print
+// ignore_for_file: unnecessary_brace_in_string_interps, avoid_print, non_constant_identifier_names
 
 import 'dart:async';
 import 'dart:io';
@@ -39,10 +39,10 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   RecordWidgetController controller = RecordWidgetController(
     pixelRatio: 1.0,
-    directory_folder_render: Directory(
-        "/home/galaxeus/Documents/galaxeus/app/record_widget/example/result"),
+    directory_folder_render: Directory(path.join(Directory.current.path, "result")),
   );
 
+  bool is_stop = false;
   void _incrementCounter() {
     setState(() {
       _counter++;
@@ -59,6 +59,9 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   task(Timer timer) async {
+    if (is_stop) {
+      return;
+    }
     // await Future.delayed(Duration(milliseconds: 500));
     // print("object");
 
@@ -101,14 +104,25 @@ class _MyHomePageState extends State<MyHomePage> {
               ElevatedButton(
                 onPressed: () async {
                   controller.stop();
+                  setState(() {
+                    is_stop = true;
+                  });
 
                   Future(() async {
                     bool is_saved = await controller.renderToVideoMp4(
-                        outputFile: File(path.join(
-                            controller.directory_folder_render.path,
-                            "output.mp4")));
+                      outputFile: File(
+                        path.join(
+                          controller.directory_folder_render.path,
+                          "output.mp4",
+                        ),
+                      ),
+                    );
 
                     print(is_saved);
+
+                  setState(() {
+                    is_stop = false;
+                  });
                   });
                 },
                 child: const Text('Render To Video'),
