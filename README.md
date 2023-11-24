@@ -35,9 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
       controller.start();
     });
   }
-
   
-
   @override
   Widget build(BuildContext context) {
     return RecordWidget(
