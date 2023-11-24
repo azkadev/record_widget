@@ -38,7 +38,8 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
   RecordWidgetController controller = RecordWidgetController(
     pixelRatio: 1.0,
-    directory_folder_render: Directory("/home/galaxeus/Documents/galaxeus/app/record_widget/example/result"),
+    directory_folder_render: Directory(
+        "/home/galaxeus/Documents/galaxeus/app/record_widget/example/result"),
   );
 
   void _incrementCounter() {

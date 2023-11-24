@@ -48,7 +48,9 @@ class IoImageExporter implements ImageExporter {
             }
             var res = i.buffer.asUint8List();
             final decodedImage = image.decodePng(res);
-            File file = File(path.join(directory_folder_render.path, "${frame_index}.png"));
+            File file = File(
+              path.join(directory_folder_render.path, "${frame_index}.png"),
+            );
             await file.writeAsBytes(res);
           });
           channel!.sink.add(RawFrame(16, i));

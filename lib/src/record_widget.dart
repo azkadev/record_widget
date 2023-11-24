@@ -15,9 +15,9 @@ import 'package:record_widget/src/image/image_exporter.dart';
 class RecordWidgetController {
   final Directory directory_folder_render;
 
-  final GlobalKey _containerKey;
-  final SchedulerBinding _binding;
-  final Exporter exporter;
+  final GlobalKey containerKey = GlobalKey();
+  final SchedulerBinding binding = SchedulerBinding.instance;
+  late final Exporter exporter;
 
   /// The pixelRatio describes the scale between the logical pixels and the size
   /// of the output image. Specifying 1.0 will give you a 1:1 mapping between
@@ -36,33 +36,37 @@ class RecordWidgetController {
 
   int skipped = 0;
 
-  bool _record = false;
+  bool is_record = false;
 
   RecordWidgetController({
     required this.directory_folder_render,
-    Exporter? exporter,
+    ImageExporter? imageExporter,
     this.pixelRatio = 1.0,
     this.skipFramesBetweenCaptures = 2,
     SchedulerBinding? binding,
-  })  : _containerKey = GlobalKey(),
-        _binding = binding ?? SchedulerBinding.instance,
-        exporter = exporter ?? ImageExporter(directory_folder_render: directory_folder_render);
-
+  }) {
+    if (imageExporter != null) {
+      exporter = imageExporter;
+    } else {
+      exporter=ImageExporter(directory_folder_render: directory_folder_render);
+    }
+    
+  }
   void start() {
     // only start a video, if no recording is in progress
-    if (_record == true) {
+    if (is_record == true) {
       return;
     }
-    _record = true;
-    _binding.addPostFrameCallback(postFrameCallback);
+    is_record = true;
+    binding.addPostFrameCallback(postFrameCallback);
   }
 
   void stop() {
-    _record = false;
+    is_record = false;
   }
 
   void postFrameCallback(Duration timestamp) async {
-    if (_record == false) {
+    if (is_record == false) {
       return;
     }
     if (skipped > 0) {
@@ -70,7 +74,7 @@ class RecordWidgetController {
       skipped = skipped - 1;
 
       // add a new PostFrameCallback to know about the next frame
-      _binding.addPostFrameCallback(postFrameCallback);
+      binding.addPostFrameCallback(postFrameCallback);
       // but we do nothing, because we skip this frame
       return;
     }
@@ -92,11 +96,11 @@ class RecordWidgetController {
         print(e.toString());
       }
     }
-    _binding.addPostFrameCallback(postFrameCallback);
+    binding.addPostFrameCallback(postFrameCallback);
   }
 
   ui.Image? capture() {
-    final renderObject = _containerKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+    final renderObject = containerKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
 
     return renderObject.toImageSync(pixelRatio: pixelRatio);
   }
@@ -120,7 +124,7 @@ class RecordWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
-      key: controller._containerKey,
+      key: controller.containerKey,
       child: child,
     );
   }
