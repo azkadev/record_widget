@@ -1,72 +1,46 @@
-# Record Widget
+IyBSZWNvcmQgV2lkZ2V0CgpSZWNvcmQgd2lkZ2V0IHNlYnVhaCBsaWJyYXJ5
+IHVudHVrIG1lcmVrYW0gd2lkZ2V0IHJlbmRlcmluZyAvIGFwYXB1biB5YW5n
+IGFkYSBwZXJ1YmFoYW4gc2VjYXJhIHJlYWx0aW1lIGRlbmdhbiBtZW55aW1w
+YW4ga2UgZ2FtYmFyIChwbmcpIGRhaHVsdSBrYXJlbmEgamlrYSBsYW5nc3Vu
+ZyBrZSB2aWRlbyBzYWF0IGluaSBiZWx1bSBiaXNhLCBkYW4gdW50dWsgbWVs
+YWt1a2FuIGNvbnZlcnQga2UgdmlkZW8ga2FtdSBwZXJsdSBtZW5naW5zdGFs
+bCBGRk1QRUcgdW50dWsgbWVuY29udmVydCBiYW55YWsgZ2FtYmFyIGtlIHZp
+ZGVvCgojIyBEZW1vCgpbIVtdKGh0dHBzOi8vcmF3LmdpdGh1YnVzZXJjb250
+ZW50LmNvbS9hemthZGV2L3JlY29yZF93aWRnZXQvbWFpbi8uZ2l0aHViL2Rl
+bW8uZ2lmKV0oaHR0cHM6Ly9naXRodWIuY29tL2F6a2FkZXYvcmVjb3JkX3dp
+ZGdldC9hc3NldHMvODI1MTM1MDIvNzFmMjMwNDktNmM1OC00MWM5LWI5NWYt
+ZTQzODBhMGRhODk5KQoKLS0tCgojIyBRdWlja3N0YXJ0CgojIyMgSW5zdGFs
+bCBsaWJyYXJ5CgpgYGBiYXNoCmZsdXR0ZXIgcHViIGFkZCByZWNvcmRfd2lk
+Z2V0CmBgYAoKIyMjIEltcG9ydCBMaWJyYXJ5CgpgYGBkYXJ0CmltcG9ydCAn
+cGFja2FnZTpyZWNvcmRfd2lkZ2V0L3JlY29yZF93aWRnZXQuZGFydCc7CmBg
+YAoKIyMjIEV4YW1wbGUgQ29kZQoKYGBgZGFydApjbGFzcyBfTXlIb21lUGFn
+ZVN0YXRlIGV4dGVuZHMgU3RhdGU8TXlIb21lUGFnZT4gewogIC8vLyBhbnkg
+Y29kZQogIFJlY29yZFdpZGdldENvbnRyb2xsZXIgY29udHJvbGxlciA9IFJl
+Y29yZFdpZGdldENvbnRyb2xsZXIoCiAgICBwaXhlbFJhdGlvOiAxLjAsCiAg
+ICBkaXJlY3RvcnlfZm9sZGVyX3JlbmRlcjogRGlyZWN0b3J5KHBhdGguam9p
+bihEaXJlY3RvcnkuY3VycmVudC5wYXRoLCAicmVzdWx0IikpLAogICk7CiAK
+ICBAb3ZlcnJpZGUKICB2b2lkIGluaXRTdGF0ZSgpIHsKICAgIHN1cGVyLmlu
+aXRTdGF0ZSgpOwogICAgV2lkZ2V0c0JpbmRpbmcuaW5zdGFuY2UuYWRkUG9z
+dEZyYW1lQ2FsbGJhY2soKF8pIGFzeW5jIHsKICAgICAgLy8gYXV0byBzdGFy
+dCByZWNvcmQgb24gZmlyc3QgZGlzcGxheSB3aWRnZXQKICAgICAgY29udHJv
+bGxlci5zdGFydCgpOwogICAgfSk7CiAgfQogIAogIEBvdmVycmlkZQogIFdp
+ZGdldCBidWlsZChCdWlsZENvbnRleHQgY29udGV4dCkgewogICAgcmV0dXJu
+IFJlY29yZFdpZGdldCgKICAgICAgY29udHJvbGxlcjogY29udHJvbGxlciwK
+ICAgICAgY2hpbGQ6IFNjYWZmb2xkKCAKICAgICAgICBib2R5OiAvLyBjb2Rl
+IGFueSB3aWRnZXQsCiAgICAgICAgZmxvYXRpbmdBY3Rpb25CdXR0b246IEZs
+b2F0aW5nQWN0aW9uQnV0dG9uKAogICAgICAgICAgb25QcmVzc2VkOiAoKSBh
+c3luYyB7CiAgICAgICAgICAgIC8vIHN0b3AgYW5kIHJlbmRlciB0byBmaWxl
+IC4vb3V0cHV0Lm1wNAogICAgICAgICAgICBjb250cm9sbGVyLnN0b3AoKTsK
+ICAgICAgICAgICAgRnV0dXJlKCgpIGFzeW5jIHsKICAgICAgICAgICAgICBi
+b29sIGlzX3NhdmUgPSBhd2FpdCBjb250cm9sbGVyLnJlbmRlclRvVmlkZW9N
+cDQob3V0cHV0RmlsZTogRmlsZSgiLi9vdXRwdXQubXA0IikpOwogICAgICAg
+ICAgICAgIHByaW50KGlzX3NhdmUgPyAiU3VjY2VzIiA6ICJHYWdhbCIpOwog
+ICAgICAgICAgICB9KTsKICAgICAgICAgIH0sCiAgICAgICAgICB0b29sdGlw
+OiAnU3RvcCcsCiAgICAgICAgICBjaGlsZDogY29uc3QgSWNvbihJY29ucy5z
+dG9wKSwKICAgICAgICApLAogICAgICApLAogICAgKTsKICB9CiAgLy8vIGFu
+eSBjb2RlCn0KYGBgCgojIyBSZW5kZXIKYGBgYmFzaApmZm1wZWcgLWYgaW1h
+Z2UyIC1pICUwMWQucG5nIG91dHB1dC5tcDQKYGBgCg==
 
-Record widget sebuah library untuk merekam widget rendering / apapun yang ada perubahan secara realtime dengan menyimpan ke gambar (png) dahulu karena jika langsung ke video saat ini belum bisa, dan untuk melakukan convert ke video kamu perlu menginstall FFMPEG untuk menconvert banyak gambar ke video
-
-## Demo
-
-[![](https://raw.githubusercontent.com/azkadev/record_widget/main/.github/demo.gif)](https://github.com/azkadev/record_widget/assets/82513502/71f23049-6c58-41c9-b95f-e4380a0da899)
-
----
-
-## Quickstart
-
-### Install library
-
-```bash
-flutter pub add record_widget
-```
-
-### Import Library
-
-```dart
-import 'package:record_widget/record_widget.dart';
-```
-
-### Example Code
-
-```dart
-class _MyHomePageState extends State<MyHomePage> {
-  /// any code
-  RecordWidgetController controller = RecordWidgetController(
-    pixelRatio: 1.0,
-    directory_folder_render: Directory(path.join(Directory.current.path, "result")),
-  );
- 
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      // auto start record on first display widget
-      controller.start();
-    });
-  }
-  
-  @override
-  Widget build(BuildContext context) {
-    return RecordWidget(
-      controller: controller,
-      child: Scaffold( 
-        body: // code any widget,
-        floatingActionButton: FloatingActionButton(
-          onPressed: () async {
-            // stop and render to file ./output.mp4
-            controller.stop();
-            Future(() async {
-              bool is_save = await controller.renderToVideoMp4(outputFile: File("./output.mp4"));
-              print(is_save ? "Succes" : "Gagal");
-            });
-          },
-          tooltip: 'Stop',
-          child: const Icon(Icons.stop),
-        ),
-      ),
-    );
-  }
-  /// any code
-}
-```
-
-## Render
-```bash
-ffmpeg -f image2 -i %01d.png output.mp4
-```
+<!-- START GLOBAL CORPORATION -->
+404: Not Found
+<!-- END GLOBAL CORPORATION -->
