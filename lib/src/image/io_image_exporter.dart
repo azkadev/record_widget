@@ -28,7 +28,9 @@ class IoImageExporter implements ImageExporter {
   final StreamController _controller = StreamController();
 
   int frame_index = 0;
-  IoImageExporter({required this.directory_folder_render}) {
+  IoImageExporter({
+    required this.directory_folder_render,
+  }) {
     _controller.stream.listen((event) async {
       if (event is Frame) {
         final i = await event.image.toByteData(format: ui.ImageByteFormat.png);
@@ -36,7 +38,7 @@ class IoImageExporter implements ImageExporter {
           frame_index++;
           Future(() async {
             if (kDebugMode) {
-              print("new frame: ${frame_index}");
+              // print("new frame: ${frame_index}");
             }
             var res = i.buffer.asUint8List();
             final decodedImage = image.decodePng(res);

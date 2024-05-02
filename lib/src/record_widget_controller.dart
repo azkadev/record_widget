@@ -48,8 +48,7 @@ class RecordWidgetController {
     if (imageExporter != null) {
       exporter = imageExporter;
     } else {
-      exporter =
-          ImageExporter(directory_folder_render: directory_folder_render);
+      exporter = ImageExporter(directory_folder_render: directory_folder_render);
     }
   }
   void start() {
@@ -100,8 +99,7 @@ class RecordWidgetController {
   }
 
   ui.Image? capture() {
-    final renderObject = containerKey.currentContext!.findRenderObject()
-        as RenderRepaintBoundary;
+    final renderObject = containerKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
 
     return renderObject.toImageSync(pixelRatio: pixelRatio);
   }

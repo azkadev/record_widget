@@ -70,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return RecordWidget(
+    return RecordWidgetRealtime(
       controller: controller,
       child: Scaffold(
         appBar: AppBar(
